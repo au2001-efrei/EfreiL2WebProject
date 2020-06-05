@@ -16,9 +16,8 @@ body {
 }
 
 header {
-	position: fixed;
+	position: sticky;
 	top: 0;
-	left: 0;
 	height: 80px;
 
 	padding: 0 5%;
@@ -29,7 +28,7 @@ header {
 	flex-direction: row;
 	align-items: center;
 
-	box-shadow: 0 0 20px #212121A0;
+	box-shadow: 0 5px 5px #21212150;
 }
 
 header .logo {
