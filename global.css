@@ -49,6 +49,22 @@ header .title {
 	margin-left: 2%;
 }
 
+header nav a.active::after {
+	content: "";
+
+	display: inline-block;
+	position: absolute;
+
+	bottom: 0;
+	left: 0;
+
+	background-color: white;
+	height: 2px;
+	width: 100%;
+
+	transition: width .3s ease-in-out;
+}
+
 nav {
 	flex-grow: 1;
 }
@@ -73,22 +89,6 @@ nav a {
 	font-family: "Roboto", sans-serif;
 
 	position: relative;
-}
-
-nav a.active::after {
-	content: "";
-
-	display: inline-block;
-	position: absolute;
-
-	bottom: 0;
-	left: 0;
-
-	background-color: white;
-	height: 2px;
-	width: 100%;
-
-	transition: width .3s ease-in-out;
 }
 
 footer {
@@ -160,7 +160,7 @@ footer .bottom .copyright {
 		box-shadow: 0 5px 5px #21212150;
 	}
 
-	nav a::after {
+	header nav a::after {
 		content: "";
 
 		display: inline-block;
@@ -176,7 +176,7 @@ footer .bottom .copyright {
 		transition: width .3s ease-in-out;
 	}
 
-	nav a:hover::after {
+	header nav a:hover::after {
 		width: 100%;
 	}
 
