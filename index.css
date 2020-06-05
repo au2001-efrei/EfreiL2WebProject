@@ -1,1 +1,78 @@
 @import url(global.css);
+
+body {
+	padding-top: 0;
+}
+
+section {
+	height: calc(100vh - 80px);
+
+	overflow: auto;
+
+	display: flex;
+}
+
+section .left, section .right {
+	flex: 1;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+section .left {
+	background-image: url(img/dots.png);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 60% auto;
+}
+
+section .left .phone {
+	width: 30%;
+
+	filter: drop-shadow(0 10px 10px rgba(0, 0, 0, .7));
+	animation: floating-phone 3s ease-in-out alternate infinite;
+}
+
+section .right div {
+	width: 80%;
+	align-self: flex-start;
+}
+
+section .right h1 {
+	font-family: "Comfortaa", cursive;
+	font-size: 300%;
+	color: #ff7722;
+
+	margin: 0;
+}
+
+section .right h2 {
+	font-family: "Roboto", sans-serif;
+	font-size: 200%;
+	font-weight: normal;
+
+	margin: 0;
+	margin-top: .5em;
+}
+
+section .right p {
+	font-family: "Roboto", sans-serif;
+	font-size: 120%;
+
+	margin: 0;
+	margin-top: 1.5em;
+
+	text-align: justify;
+}
+
+@-webkit-keyframes floating-phone {
+    0% {
+        transform: translate(0) rotate(-10deg)
+    }
+
+    100% {
+        transform: translate(-10px, -20px) rotate(-10deg)
+    }
+}
