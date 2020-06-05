@@ -142,7 +142,7 @@ footer .bottom .icon {
 	margin-left: 15px;
 }
 
-footer .bottom .copyright {
+footer .bottom .legal .line {
 	background-color: white;
 	color: #212121;
 	font-family: "Roboto", sans-serif;
@@ -150,6 +150,16 @@ footer .bottom .copyright {
 	margin: 0;
 	padding: .3em .8em;
 	border-radius: 100px;
+
+	text-align: center;
+}
+
+footer .bottom .legal .line + .line {
+	margin-top: 1em;
+}
+
+footer .bottom .legal a {
+	text-decoration: underline;
 }
 
 @media screen and (min-width: 800px) {
@@ -236,10 +246,9 @@ footer .bottom .copyright {
 		margin-left: 0;
 	}
 
-	footer .bottom .copyright {
+	footer .bottom .legal {
 		margin-left: 15px;
 		flex-grow: 1;
-		text-align: center;
 	}
 
 }
@@ -310,7 +319,7 @@ footer .bottom .copyright {
 		margin-left: 15px;
 	}
 
-	footer .bottom .copyright {
+	footer .bottom .legal {
 		flex-grow: 0;
 		margin-left: 0;
 		margin-top: 15px;
