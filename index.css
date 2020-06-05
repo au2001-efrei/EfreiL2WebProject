@@ -66,13 +66,13 @@ section .right p {
 }
 
 @-webkit-keyframes floating-phone {
-    0% {
-        transform: translate(0) rotate(-10deg)
-    }
+	0% {
+		transform: translate(0) rotate(-10deg)
+	}
 
-    100% {
-        transform: translate(-10px, -20px) rotate(-10deg)
-    }
+	100% {
+		transform: translate(-10px, -20px) rotate(-10deg)
+	}
 }
 
 @media screen and (max-width: 799px) and (min-height: 800px) {
