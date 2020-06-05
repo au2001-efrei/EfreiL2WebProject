@@ -1,0 +1,18 @@
+main {
+	font-family: "Roboto", sans-serif;
+}
+
+#loading {
+	font-size: 200%;
+
+	margin: 2em 0;
+	text-align: center;
+}
+
+#loading i {
+	margin-right: 1em;
+}
+
+.hidden {
+	display: none;
+}

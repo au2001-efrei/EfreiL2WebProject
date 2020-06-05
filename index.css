@@ -66,6 +66,15 @@ section .right p {
 	text-align: justify;
 }
 
+.columns {
+	display: flex;
+	flex-direction: row;
+}
+
+.columns > * {
+	flex: 1;
+}
+
 @-webkit-keyframes floating-phone {
 	0% {
 		transform: translate(0) rotate(-10deg)
