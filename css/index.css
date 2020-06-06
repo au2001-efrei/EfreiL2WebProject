@@ -62,6 +62,15 @@ section .right p {
 	text-align: justify;
 }
 
+#random-coins {
+	white-space: nowrap;
+	overflow-x: auto;
+}
+
+#random-coins .coin {
+	display: inline-block;
+}
+
 .columns {
 	display: flex;
 	flex-direction: row;

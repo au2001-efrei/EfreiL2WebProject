@@ -16,3 +16,24 @@ main {
 .hidden {
 	display: none;
 }
+
+.coin {
+	width: 500px;
+	height: 250px;
+
+	box-sizing: border-box;
+	padding: 20px 25px;
+	margin: 20px;
+
+	border-radius: 35px;
+
+	box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.16);
+}
+
+.coin-white {
+	background-color: white;
+}
+
+.coin-black {
+	background-color: #212121;
+}

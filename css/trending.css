@@ -1,2 +1,10 @@
 @import url(./global.css);
 @import url(./coins.css);
+
+#trending-coins {
+	display: flex;
+
+	flex-wrap: wrap;
+
+	justify-content: space-around;
+}
