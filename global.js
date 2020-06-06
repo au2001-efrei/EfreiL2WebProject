@@ -1,17 +1,22 @@
-async function getCoinsCount() {
-	const response = await fetch(`https://api.coinranking.com/v1/public/coins?limit=1`);
+async function getCoinsList(limit = 100, offset = 0, sort = "coinranking", order = "desc") {
+	if (limit <= 0) {
+		return {
+			stats: {},
+			base: {},
+			coins: []
+		};
+	}
+
+	const response = await fetch(`https://api.coinranking.com/v1/public/coins?limit=${limit}&offset=${offset}&sort=${sort}&order=${order}`);
 	const json = await response.json();
 
 	if (json.status !== "success")
 		throw JSON.stringify(json);
 
-	return json.data.stats.total;
+	return json.data;
 }
 
 async function getCoin(id) {
-	if (Array.isArray(id))
-		id = id.join(",");
-
 	const response = await fetch(`https://api.coinranking.com/v1/public/coin/${id}`);
 	const json = await response.json();
 
@@ -21,44 +26,28 @@ async function getCoin(id) {
 	return json.data;
 }
 
-async function getUp(number = 100) {
-	if (number <= 0) {
-		return {
-			stats: {},
-			base: {},
-			coins: []
-		};
-	}
-
-	const response = await fetch(`https://api.coinranking.com/v1/public/coins?sort=change&order=desc&limit=${number}`);
-	const json = await response.json();
-
-	if (json.status !== "success")
-		throw JSON.stringify(json);
-
-	return json.data;
+async function getCoinsCount() {
+	const list = await getCoinsList(1);
+	return list.stats.total;
 }
 
-async function getDown(number = 100) {
-	if (number <= 0) {
-		return {
-			stats: {},
-			base: {},
-			coins: []
-		};
-	}
-
-	const response = await fetch(`https://api.coinranking.com/v1/public/coins?sort=change&order=asc&limit=${number}`);
-	const json = await response.json();
-
-	if (json.status !== "success")
-		throw JSON.stringify(json);
-
-	return json.data;
+async function getTrending(limit = 100) {
+	const list = await getCoinsList(limit);
+	return list;
 }
 
-async function getRandomCoins(number = 3) {
-	if (number <= 0) {
+async function getUp(limit = 100) {
+	const list = await getCoinsList(limit, 0, "change");
+	return list;
+}
+
+async function getDown(limit = 100) {
+	const list = await getCoinsList(limit, 0, "change", "asc");
+	return list;
+}
+
+async function getRandomCoins(limit = 3) {
+	if (limit <= 0) {
 		return {
 			stats: {},
 			base: {},
@@ -70,9 +59,9 @@ async function getRandomCoins(number = 3) {
 
 	var promises = [];
 
-	for (var i = 0; i < number; i++) {
+	for (var i = 0; i < limit; i++) {
 		const offset = Math.floor(Math.random() * coinsCount);
-		promises.push(fetch(`https://api.coinranking.com/v1/public/coins?offset=${offset}&limit=1`).then(response => response.json()));
+		promises.push(getCoinsList(1, offset));
 	}
 
 	const responses = await Promise.all(promises);
@@ -80,24 +69,21 @@ async function getRandomCoins(number = 3) {
 	var coins = [];
 	var base = {};
 	var stats = {
-		limit: number,
+		limit: limit,
 		offset: null,
 		order: null
 	};
 
-	for (var i = 0; i < number; i++) {
-		if (responses[i].status !== "success")
-			throw JSON.stringify(responses[i]);
-
-		for (var key in responses[i].data.base)
+	for (var i = 0; i < limit; i++) {
+		for (var key in responses[i].base)
 			if (!base.hasOwnProperty(key))
-				base[key] = responses[i].data.base[key];
+				base[key] = responses[i].base[key];
 
-		for (var key in responses[i].data.stats)
+		for (var key in responses[i].stats)
 			if (!stats.hasOwnProperty(key))
-				stats[key] = responses[i].data.stats[key];
+				stats[key] = responses[i].stats[key];
 
-		coins.push(responses[i].data.coins[0]);
+		coins.push(responses[i].coins[0]);
 	}
 
 	return { stats, base, coins };
