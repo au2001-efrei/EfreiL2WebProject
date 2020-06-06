@@ -59,13 +59,17 @@ async function getRandomCoins(limit = 3) {
 
 	const coinsCount = await getCoinsCount();
 
-	var promises = [];
+	var offsets = [];
 
 	for (var i = 0; i < limit; ++i) {
-		const offset = Math.floor(Math.random() * coinsCount);
-		promises.push(getCoinsList(1, offset));
+		var offset;
+		do {
+			offset = Math.floor(Math.random() * coinsCount);
+		} while (offsets.includes(offset));
+		offsets.push(offset);
 	}
 
+	const promises = offsets.map(offset => getCoinsList(1, offset));
 	const responses = await Promise.all(promises);
 
 	var coins = [];
