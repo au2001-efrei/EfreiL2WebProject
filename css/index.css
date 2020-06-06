@@ -62,6 +62,16 @@ section .right p {
 	text-align: justify;
 }
 
+#content {
+	width: 90%;
+	margin: 0 auto;
+}
+
+.global-title {
+	margin: 0;
+	margin-top: 2em;
+}
+
 #random-coins {
 	white-space: nowrap;
 	overflow-x: auto;
