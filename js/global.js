@@ -123,7 +123,34 @@ function formatChange(change) {
 
 function formatTimeDelta(delta) {
 	delta = parseFloat(delta);
-	return (delta / 1000 / 60 / 60 / 24 / 365).toFixed() + " years";
+
+	if (delta < 1000)
+		return delta.toFixed() + " ms";
+	delta /= 1000;
+
+	if (delta < 60)
+		return delta.toFixed() + " secs";
+	delta /= 60;
+
+	if (delta < 60)
+		return delta.toFixed() + " mins";
+	delta /= 60;
+
+	if (delta < 24)
+		return delta.toFixed() + " hours";
+	delta /= 24;
+
+	if (delta < 7)
+		return delta.toFixed() + " days";
+
+	if (delta < 30)
+		return (delta / 7).toFixed() + " weeks";
+
+	if (delta < 365)
+		return (delta / 30.5).toFixed() + " months";
+	delta /= 365;
+
+	return delta.toFixed() + " years";
 }
 
 function formatPrice(price) {
