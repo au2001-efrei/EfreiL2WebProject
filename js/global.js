@@ -121,6 +121,8 @@ function getColorBrightness(hex) {
 }
 
 function formatChange(change) {
+	if (change === null)
+		return "?";
 	change = parseFloat(change);
 	return (change > 0 ? "+" : change == 0 ? "±" : "-") + Math.abs(change).toFixed(2) + "%";
 }
@@ -158,6 +160,8 @@ function formatTimeDelta(delta) {
 }
 
 function formatPrice(price, currency = "$") {
+	if (price === null)
+		return "?";
 	price = parseFloat(price);
 
 	if (price < 1E1)
