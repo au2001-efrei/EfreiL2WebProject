@@ -188,12 +188,23 @@ function formatPrice(price, currency = "$") {
 	return currency + price.toFixed(4) + "E" + (multipliers.length * 3 + power);
 }
 
-function formatVolume(volume) {
+function formatVolume(volume, currency = "$") {
 	if (volume === null)
 		return "?";
-
 	volume = parseFloat(volume);
-	return "$" + (volume / 1000000000).toFixed(2) + "B";
+
+	const multipliers = ["", "k", "M", "B", "T", "Q"];
+	for (var i = 0; i < multipliers.length; i++) {
+		const multiplier = multipliers[i];
+
+		if (volume < 1E3)
+			return currency + volume.toFixed(2) + multiplier;
+		volume /= 1E3;
+	}
+
+	const power = Math.floor(Math.log10(volume));
+	volume /= Math.pow(10, power);
+	return currency + volume.toFixed(2) + "E" + (multipliers.length * 3 + power);
 }
 
 // DOM //
