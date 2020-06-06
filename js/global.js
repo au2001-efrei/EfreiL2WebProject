@@ -325,7 +325,7 @@ function createCoinCard(coin) {
 	if (coin.websiteUrl !== null) {
 		const website = document.createElement("a");
 		website.className = "coin-link";
-		website.href = icon.websiteUrl;
+		website.href = coin.websiteUrl;
 		website.target = "_blank";
 
 		const websiteIcon = document.createElement("i");
