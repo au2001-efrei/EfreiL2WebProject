@@ -182,6 +182,10 @@ function formatPrice(price, currency = "$") {
 
 		price /= 1E3;
 	}
+
+	const power = Math.floor(Math.log10(price));
+	price /= Math.pow(10, power);
+	return currency + price.toFixed(4) + "E" + (multipliers.length * 3 + power);
 }
 
 function formatVolume(volume) {
