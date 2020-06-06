@@ -151,3 +151,7 @@ main {
 .coin-link {
 	margin: 0 5px;
 }
+
+.coin-link + .coin-link + .coin-link + .coin-link + .coin-link + .coin-link {
+	display: none;
+}
