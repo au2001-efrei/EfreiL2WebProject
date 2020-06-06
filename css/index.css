@@ -17,7 +17,7 @@ section .left, section .right {
 }
 
 section .left {
-	background-image: url(./img/dots.png);
+	background-image: url(../img/dots.png);
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: 60% auto;
