@@ -153,9 +153,31 @@ function formatTimeDelta(delta) {
 	return delta.toFixed() + " years";
 }
 
-function formatPrice(price) {
+function formatPrice(price, currency = "$") {
 	price = parseFloat(price);
-	return "$" + price.toFixed();
+
+	if (price < 1E1)
+		return currency + price.toFixed(4);
+
+	if (price < 1E2)
+		return currency + price.toFixed(3);
+
+	const multipliers = ["", "k", "M", "B", "T", "Q"];
+
+	for (var i = 0; i < multipliers.length; i++) {
+		const multiplier = multipliers[i];
+
+		if (price < 1E3)
+			return currency + price.toFixed(2) + multiplier;
+
+		if (price < 1E4)
+			return currency + Math.floor(price / 1E3) + "," + (price % 1E3).toFixed(1).padStart(5, "0") + multiplier;
+
+		if (price < 1E5)
+			return currency + Math.floor(price / 1E3) + "," + (price % 1E3).toFixed().padStart(3, "0") + multiplier;
+
+		price /= 1E3;
+	}
 }
 
 function formatVolume(volume) {
