@@ -37,3 +37,117 @@ main {
 .coin-black {
 	background-color: #212121;
 }
+
+.coin-top {
+	display: flex;
+	height: 50px;
+	margin-bottom: 20px;
+
+	align-items: center;
+}
+
+.coin-icon-container {
+	padding: 10px;
+	margin: -10px;
+	margin-right: 0;
+
+	background-color: white;
+	border-radius: 50px;
+}
+
+.coin-icon {
+	width: 50px;
+	height: 50px;
+
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+}
+
+.coin-title {
+	flex: 1;
+	margin: 0;
+	margin-left: .5em;
+}
+
+.coin-white .coin-bottom, .coin-white .coin-graph {
+	color: #212121;
+}
+
+.coin-black .coin-bottom, .coin-black .coin-graph {
+	color: white;
+}
+
+.coin-graph {
+	display: flex;
+}
+
+.coin-axis, .coin-variation {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+
+	width: 60px;
+}
+
+.coin-axis {
+	align-items: flex-end;
+	margin-right: 5px;
+}
+
+.coin-variation {
+	align-items: flex-start;
+	margin-left: 5px;
+}
+
+.coin-bottom {
+	display: flex;
+	height: 45px;
+	margin-top: 20px;
+}
+
+.coin-rank, .coin-labels, .coin-values {
+	margin: 0;
+}
+
+.coin-rank {
+	display: flex;
+
+	font-size: 24px;
+
+	justify-content: center;
+	align-items: center;
+
+	padding-right: 20px;
+}
+
+.coin-labels, .coin-values {
+	flex: 1;
+	font-size: 12px;
+	line-height: 15px;
+}
+
+.coin-labels {
+	text-align: right;
+	padding-right: 5px;
+}
+
+.coin-values {
+	padding-left: 5px;
+}
+
+.coin-socials {
+	flex: 2;
+
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	flex-wrap: wrap;
+
+	font-size: 24px;
+	line-height: 22.5px;
+}
+
+.coin-link {
+	margin: 0 5px;
+}

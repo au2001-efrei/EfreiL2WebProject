@@ -61,7 +61,7 @@ async function getRandomCoins(limit = 3) {
 
 	var promises = [];
 
-	for (var i = 0; i < limit; i++) {
+	for (var i = 0; i < limit; ++i) {
 		const offset = Math.floor(Math.random() * coinsCount);
 		promises.push(getCoinsList(1, offset));
 	}
@@ -76,7 +76,7 @@ async function getRandomCoins(limit = 3) {
 		order: null
 	};
 
-	for (var i = 0; i < limit; i++) {
+	for (var i = 0; i < limit; ++i) {
 		for (var key in responses[i].base)
 			if (!base.hasOwnProperty(key))
 				base[key] = responses[i].base[key];
@@ -141,6 +141,35 @@ function formatVolume(volume) {
 
 // DOM //
 
+function drawCoinGraph(canvas, coin, min_price, max_price) {
+	if (coin.history.length <= 1 || max_price <= min_price)
+		return;
+
+	const context = canvas.getContext("2d");
+
+	const spacing = canvas.width / (coin.history.length - 1) * 4/5;
+	const barWidth = canvas.width / (coin.history.length - 1) - spacing;
+	const minBarHeight = 2;
+
+	for (var i = 0; i < coin.history.length - 1; ++i) {
+		const offsetX = spacing / 2 + (spacing + barWidth) * i;
+		const fromPrice = coin.history[coin.history.length - i - 1];
+		const toPrice = coin.history[coin.history.length - i - 2];
+
+		var fromY = (fromPrice - min_price) / (max_price - min_price) * canvas.height;
+		var toY = (toPrice - min_price) / (max_price - min_price) * canvas.height;
+
+		if (Math.abs(toY - fromY) < minBarHeight) {
+			const midY = (fromY + toY) / 2;
+			fromY = midY + (fromY >= toY ? minBarHeight / 2 : -minBarHeight / 2);
+			toY = toY + (fromY >= toY ? -minBarHeight / 2 : minBarHeight / 2);
+		}
+
+		context.fillStyle = fromY >= toY ? "#41b958" : "#d93939";
+		context.fillRect(offsetX, Math.min(fromY, toY), barWidth, Math.abs(toY - fromY));
+	}
+}
+
 function createCoinCard(coin) {
 	/*
 	{
@@ -194,26 +223,157 @@ function createCoinCard(coin) {
 	*/
 
 	const element = document.createElement("div");
-	element.classList.add("coin");
 
 	const white = getColorBrightness(coin.color) <= 160/255;
-	element.classList.add("coin-" + (white ? "white" : "black"));
+	element.className = "coin coin-" + (white ? "white" : "black");
 	element.style.color = coin.color !== null ? coin.color : "black";
 
 	var min_price = coin.price, max_price = coin.price;
-	for (var i = 0; i < coin.history.length; i++) {
+	for (var i = 0; i < coin.history.length; ++i) {
 		min_price = Math.min(min_price, coin.history[i]);
 		max_price = Math.max(max_price, coin.history[i]);
 	}
 
-	element.innerText = `${coin.name} – ${coin.symbol}
-	Change: ${formatChange(coin.change)}
-	Min: ${formatPrice(min_price)}
-	Max: ${formatPrice(max_price)}
-	#${coin.rank}
-	24h vol.: ${formatVolume(coin.volume)}
-	All high: ${formatPrice(coin.allTimeHigh.price)}
-	Age: ${formatTimeDelta(new Date().getTime() - coin.firstSeen)}`;
+	const top = document.createElement("div");
+	top.className = "coin-top";
+
+	const iconContainer = document.createElement("div");
+	iconContainer.className = "coin-icon-container";
+
+	const icon = document.createElement("div");
+	icon.className = "coin-icon";
+	icon.style.backgroundImage = `url("${coin.iconUrl.replace("\\", "\\\\").replace("\"", "\\\"")}")`;
+	iconContainer.appendChild(icon);
+
+	top.appendChild(iconContainer);
+
+	const title = document.createElement("h1");
+	title.className = "coin-title";
+	title.innerText = coin.name !== coin.symbol ? coin.name + " – " + coin.symbol : coin.name;
+	top.appendChild(title);
+
+	element.appendChild(top);
+
+	const graph = document.createElement("div");
+	graph.className = "coin-graph";
+
+	const axis = document.createElement("div");
+	axis.className = "coin-axis";
+
+	const max = document.createElement("div");
+	max.className = "coin-max";
+	max.innerText = formatPrice(max_price);
+	axis.appendChild(max);
+
+	const min = document.createElement("div");
+	min.className = "coin-min";
+	min.innerText = formatPrice(min_price);
+	axis.appendChild(min);
+
+	graph.appendChild(axis);
+
+	const canvas = document.createElement("canvas");
+	canvas.className = "coin-canvas";
+	canvas.height = 75;
+	canvas.width = 320;
+	drawCoinGraph(canvas, coin, min_price, max_price);
+	graph.appendChild(canvas);
+
+	const variation = document.createElement("div");
+	variation.className = "coin-variation";
+
+	variation.appendChild(document.createTextNode("Current:"));
+
+	const price = document.createElement("div");
+	price.className = "coin-price";
+	price.innerText = formatPrice(coin.price);
+	variation.appendChild(price);
+
+	variation.appendChild(document.createTextNode("24h var.:"));
+
+	const change = document.createElement("div");
+	change.className = "coin-change";
+	change.innerText = formatChange(coin.change);
+	change.style.color = coin.change > 0 ? "#41b958" : coin.change < 0 ? "#d93939" : "";
+	variation.appendChild(change);
+
+	graph.appendChild(variation);
+
+	element.appendChild(graph);
+
+	const bottom = document.createElement("div");
+	bottom.className = "coin-bottom";
+
+	const rank = document.createElement("p");
+	rank.className = "coin-rank";
+	rank.innerText = "#" + coin.rank;
+	bottom.appendChild(rank);
+
+	const labels = document.createElement("p");
+	labels.className = "coin-labels";
+	labels.innerText = "24h volume\nAll-time high\nCoin age";
+	bottom.appendChild(labels);
+
+	const values = document.createElement("p");
+	values.className = "coin-values";
+	values.innerText = `${formatVolume(coin.volume)}\n${formatPrice(coin.allTimeHigh.price)}\n${formatTimeDelta(new Date().getTime() - coin.firstSeen)}`;
+	bottom.appendChild(values);
+
+	const socials = document.createElement("div");
+	socials.className = "coin-socials";
+
+	if (coin.websiteUrl !== null) {
+		const website = document.createElement("a");
+		website.className = "coin-link";
+		website.href = icon.websiteUrl;
+		website.target = "_blank";
+
+		const websiteIcon = document.createElement("i");
+		websiteIcon.className = "fa fa-globe";
+		website.appendChild(websiteIcon);
+
+		socials.appendChild(website);
+	}
+
+	for (var i = 0; i < coin.socials.length; ++i) {
+		const social = coin.socials[i];
+
+		const link = document.createElement("a");
+		link.className = "coin-link";
+		link.href = social.url;
+		link.target = "_blank";
+		link.title = social.name;
+
+		switch(social.type) {
+		case "twitter":
+		case "discord":
+		case "youtube":
+		case "instagram":
+		case "telegram":
+		case "reddit":
+		case "medium":
+		case "facebook":
+		case "github":
+			const icon = document.createElement("i");
+			icon.className = "fab fa-" + social.type;
+			link.appendChild(icon);
+			break;
+
+		case "bitcointalk":
+			const bitcoinIcon = document.createElement("i");
+			bitcoinIcon.className = "fab fa-bitcoin";
+			link.appendChild(bitcoinIcon);
+			break;
+
+		default:
+			continue;
+		}
+
+		socials.appendChild(link);
+	}
+	bottom.appendChild(socials);
+
+	element.appendChild(bottom);
 
 	return element;
 }
