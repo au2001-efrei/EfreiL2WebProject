@@ -119,16 +119,16 @@ function getColorBrightness(hex) {
 }
 
 function formatChange(change) {
+	change = parseFloat(change);
 	if (!Number.isFinite(change))
 		return "?";
-	change = parseFloat(change);
 	return (change > 0 ? "+" : change == 0 ? "±" : "-") + Math.abs(change).toFixed(2) + "%";
 }
 
 function formatTimeDelta(delta) {
+	delta = parseFloat(delta);
 	if (!Number.isFinite(delta))
 		return "?";
-	delta = parseFloat(delta);
 
 	if (delta < 1000)
 		return delta.toFixed() + " ms";
@@ -160,9 +160,9 @@ function formatTimeDelta(delta) {
 }
 
 function formatPrice(price, currency = "$") {
+	price = parseFloat(price);
 	if (!Number.isFinite(price))
 		return "?";
-	price = parseFloat(price);
 
 	if (price < 1E1)
 		return currency + price.toFixed(4);
@@ -193,9 +193,9 @@ function formatPrice(price, currency = "$") {
 }
 
 function formatVolume(volume, currency = "$") {
+	volume = parseFloat(volume);
 	if (!Number.isFinite(volume))
 		return "?";
-	volume = parseFloat(volume);
 
 	const multipliers = ["", "k", "M", "B", "T", "Q"];
 	for (var i = 0; i < multipliers.length; i++) {
