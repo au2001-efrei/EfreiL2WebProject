@@ -308,7 +308,7 @@ function createCoinCard(coin) {
 
 	const title = document.createElement("h1");
 	title.className = "coin-title";
-	title.innerText = coin.name !== coin.symbol ? coin.name + " – " + coin.symbol : coin.name;
+	title.innerText = coin.name.trim() !== coin.symbol ? coin.name.trim() + " – " + coin.symbol : coin.name;
 	top.appendChild(title);
 
 	element.appendChild(top);
