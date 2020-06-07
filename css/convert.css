@@ -1,0 +1,18 @@
+@import url(./global.css);
+
+#content {
+	width: 90%;
+	margin: 0 auto;
+}
+
+.global-title {
+	margin: 0;
+	margin-top: 2em;
+}
+
+input[name=from-custom]:checked ~ .from-non-custom,
+input[name=from-custom]:not(:checked) ~ .from-custom,
+input[name=to-custom]:checked ~ .to-non-custom,
+input[name=to-custom]:not(:checked) ~ .to-custom {
+	display: none;
+}

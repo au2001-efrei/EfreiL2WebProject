@@ -28,6 +28,19 @@ async function getCoin(id) {
 	return json.data;
 }
 
+async function searchCoinSymbol(symbol) {
+	if (Array.isArray(symbol))
+		symbol = symbol.join(",");
+
+	const response = await fetch(`https://api.coinranking.com/v1/public/coins?symbols=${symbol}`);
+	const json = await response.json();
+
+	if (json.status !== "success")
+		throw JSON.stringify(json);
+
+	return json.data;
+}
+
 async function getCoinsCount() {
 	const list = await getCoinsList(1);
 	return list.stats.total;

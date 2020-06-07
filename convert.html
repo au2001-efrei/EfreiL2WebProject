@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<link rel="stylesheet" type="text/css" href="./css/convert.css" />
+		<script type="text/javascript" src="./js/global.js"></script>
+		<link rel="icon" type="image/x-icon" href="./img/favicon.ico" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" />
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/brands.min.css" />
+		<title>Mackee</title>
+	</head>
+	<body>
+		<header>
+			<div class="logo">
+				<a href="./index.html"><img src="./img/logo.png" alt="Mackee" /></a>
+			</div>
+			<h1 class="title">
+				<a href="./index.html">Mackee</a>
+			</h1>
+			<nav>
+				<ul>
+					<li>
+						<a href="./index.html">Explore</a>
+					</li>
+					<li>
+						<a href="./trending.html">Trending</a>
+					</li>
+					<li>
+						<a href="./favorites.html">Favorites</a>
+					</li>
+					<li>
+						<a href="./ranking.html">Ranking</a>
+					</li>
+					<li>
+						<a href="./convert.html" class="active">Convert</a>
+					</li>
+					<li>
+						<a href="./learn.html">Learn</a>
+					</li>
+					<li>
+						<a href="./about.html">Who are we?</a>
+					</li>
+					<li>
+						<a href="./manage.html">Let's play!</a>
+					</li>
+				</ul>
+			</nav>
+		</header>
+
+		<main>
+			<div id="loading"><i class="fa fa-spinner fa-pulse"></i> Loading... Please wait.</div>
+			<div id="content" class="hidden">
+				<h1 class="global-title">Convert between fiats or cryptocurrencies</h1>
+				<div id="convert-coins">
+					<form id="convert-form" onsubmit="return false">
+						<input type="submit" class="hidden" />
+						<!-- Prevents a bug on Safari where pressing enter in a text field causes the click event on the invert button -->
+
+						<input type="number" name="from-coin-amount" placeholder="Amount" value="1" />
+
+						<div id="from-coin">
+							<input type="checkbox" name="from-custom" id="from-custom" class="hidden" />
+							<select name="from-coin-select" class="from-non-custom"></select>
+							<input type="text" name="from-coin" placeholder="Coin symbol (ex. BTC, USD, EUR...)" class="from-custom" />
+							<label class="from-non-custom" for="from-custom">or enter the coin manually</label>
+							<label class="from-custom" for="from-custom"><i class="fa fa-times"></i></label>
+						</div>
+
+						<button id="invert-from-to" onclick="return false">
+							<i class="fa fa-exchange-alt"></i>
+						</button>
+
+						<span class="to-coin-amount">1</span>
+
+						<div id="to-coin">
+							<input type="checkbox" name="to-custom" id="to-custom" class="hidden" />
+							<select name="to-coin-select" class="to-non-custom"></select>
+							<input type="text" name="to-coin" placeholder="Coin symbol (ex. BTC, USD, EUR...)" class="to-custom" />
+							<label class="to-non-custom" for="to-custom">or enter the coin manually</label>
+							<label class="to-custom" for="to-custom"><i class="fa fa-times"></i></label>
+						</div>
+					</form>
+				</div>
+			</div>
+		</main>
+
+		<footer>
+			<div class="top">
+				<div class="logo">
+					<a href="./index.html"><img src="./img/logo.png" alt="Mackee" /></a>
+				</div>
+				<div class="title">
+					<a href="./index.html">Mackee</a>
+				</div>
+				<nav>
+					<ul>
+						<li>
+							<a href="./index.html">Explore</a>
+						</li>
+						<li>
+							<a href="./trending.html">Trending</a>
+						</li>
+						<li>
+							<a href="./favorites.html">Favorites</a>
+						</li>
+						<li>
+							<a href="./ranking.html">Ranking</a>
+						</li>
+						<li>
+							<a href="./convert.html">Convert</a>
+						</li>
+						<li>
+							<a href="./learn.html">Learn</a>
+						</li>
+						<li>
+							<a href="./about.html">Who are we?</a>
+						</li>
+						<li>
+							<a href="./manage.html">Let's play!</a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+			<hr/>
+			<div class="bottom">
+				<div class="icons">
+					<a href="https://mackee.app" target="_blank" class="icon"><i class="fa fa-globe"></i></a>
+					<a href="https://www.facebook.com/Mackee-105889694362138/" target="_blank" class="icon"><i class="fab fa-facebook-square"></i></a>
+					<a href="https://www.instagram.com/mackee.app/" target="_blank" class="icon"><i class="fab fa-instagram-square"></i></a>
+				</div>
+				<div class="legal">
+					<p class="line">Copyright &copy; Aurélien&nbsp;Garnier &amp; Rémi&nbsp;Legrand 2020</p>
+					<p class="line">Data provided by <a href="https://coinranking.com" target="_blank">Coinranking</a></p>
+				</div>
+			</div>
+		</footer>
+		<script type="text/javascript" src="./js/convert.js"></script>
+	</body>
+</html>
