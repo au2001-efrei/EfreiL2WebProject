@@ -52,6 +52,16 @@
 		}
 
 		const [ fromCoin, toCoin ] = await Promise.all([findCoin(fromCoinSymbol), findCoin(toCoinSymbol)]);
+		if (fromCoin === null) {
+			alert(`No cryptocurrency or fiat found with the symbol "${fromCoinSymbol}".`)
+			return;
+		}
+
+		if (toCoin === null) {
+			alert(`No cryptocurrency or fiat found with the symbol "${toCoinSymbol}".`)
+			return;
+		}
+
 		const fromPrice = parseFloat(fromCoin.price), toPrice = parseFloat(toCoin.price);
 		const result = amount * fromPrice / toPrice;
 		toAmount.innerText = formatPrice(result, "");
