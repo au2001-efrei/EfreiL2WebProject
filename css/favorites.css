@@ -1,0 +1,12 @@
+@import url(./global.css);
+@import url(./coins.css);
+
+#content {
+	width: 90%;
+	margin: 0 auto;
+}
+
+.global-title {
+	margin: 0;
+	margin-top: 2em;
+}
