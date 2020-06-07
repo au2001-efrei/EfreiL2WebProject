@@ -3,9 +3,14 @@
 #content {
 	width: 90%;
 	margin: 0 auto;
+	padding-bottom: 50px;
 }
 
 .global-title {
 	margin: 0;
 	margin-top: 2em;
+}
+
+#content a:link {
+	text-decoration: underline;
 }
