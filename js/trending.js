@@ -1,5 +1,5 @@
 (async function() {
-	const trending = await getTrending();
+	const trending = await getCoinsList();
 
 	fillCoins(document.querySelector("#trending-coins"), trending.coins);
 	document.querySelector("#loading").classList.add("hidden");

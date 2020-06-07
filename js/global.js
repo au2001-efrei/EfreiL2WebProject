@@ -33,21 +33,6 @@ async function getCoinsCount() {
 	return list.stats.total;
 }
 
-async function getTrending(limit = 100) {
-	const list = await getCoinsList(limit);
-	return list;
-}
-
-async function getUp(limit = 100) {
-	const list = await getCoinsList(limit, 0, "change");
-	return list;
-}
-
-async function getDown(limit = 100) {
-	const list = await getCoinsList(limit, 0, "change", "asc");
-	return list;
-}
-
 async function getRandomCoins(limit = 3) {
 	if (limit <= 0) {
 		return {
