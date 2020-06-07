@@ -163,7 +163,7 @@ footer .bottom .legal a {
 	text-decoration: underline;
 }
 
-@media screen and (min-width: 800px) {
+@media screen and (min-width: 900px) {
 
 	header {
 		position: sticky;
@@ -193,7 +193,7 @@ footer .bottom .legal a {
 
 }
 
-@media screen and (max-width: 799px) {
+@media screen and (max-width: 899px) {
 
 	header .logo, footer .top .logo {
 		margin-right: 5%;
@@ -205,7 +205,7 @@ footer .bottom .legal a {
 
 }
 
-@media screen and (max-width: 649px) {
+@media screen and (max-width: 799px) {
 
 	nav a {
 		font-size: 100%;
@@ -217,7 +217,7 @@ footer .bottom .legal a {
 
 }
 
-@media screen and (max-width: 579px) {
+@media screen and (max-width: 699px) {
 
 	nav ul {
 		justify-content: flex-end;
@@ -254,7 +254,7 @@ footer .bottom .legal a {
 
 }
 
-@media screen and (max-width: 479px) {
+@media screen and (max-width: 649px) {
 
 	header {
 		display: block;
