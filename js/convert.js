@@ -9,7 +9,7 @@
 	const fromInput = form['from-coin'], toInput = form['to-coin'];
 	const fromAmount = form['from-coin-amount'], toAmount = form.querySelector(".to-coin-amount");
 
-	for (var i = 0; i < sample.coins.length; i++) {
+	for (var i = 0; i < sample.coins.length; ++i) {
 		const coin = sample.coins[i];
 
 		const option = document.createElement("option");
@@ -20,24 +20,19 @@
 		toSelect.appendChild(option.cloneNode(true));
 	}
 
-	var cache = sample.coins;
+	var cache = {};
+	for (var i = 0; i < sample.coins.length; ++i) {
+		const coin = sample.coins[i];
+		cache[coin.symbol.toUpperCase()] = coin;
+	}
 
 	async function findCoin(symbol) {
-		var a = 0, b = cache.length;
-		while (a < b) {
-			const mid = Math.floor((a + b) / 2);
-			const compare = cache[mid].symbol.localeCompare(symbol);
-			if (compare == 0)
-				return cache[mid];
-			if (compare < 0)
-				a = mid + 1;
-			if (compare > 0)
-				b = mid;
-		}
+		if (cache.hasOwnProperty(symbol.toUpperCase()))
+			return cache[symbol.toUpperCase()];
 
 		const searchResult = await searchCoinSymbol(symbol);
 		const coin = searchResult.coins[0];
-		cache.splice(a, 0, coin);
+		cache[coin.symbol.toUpperCase()] = coin;
 		return coin;
 	}
 
