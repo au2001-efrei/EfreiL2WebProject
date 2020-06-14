@@ -7,6 +7,7 @@
 
 	const fromSelect = form['from-coin-select'], toSelect = form['to-coin-select'];
 	const fromInput = form['from-coin'], toInput = form['to-coin'];
+	const fromCustom = form['from-custom'], toCustom = form['to-custom'];
 	const fromAmount = form['from-coin-amount'], toAmount = form.querySelector(".to-coin-amount");
 
 	for (var i = 0; i < sample.coins.length; ++i) {
@@ -83,6 +84,20 @@
 	toSelect.addEventListener("change", function() {
 		toInput.value = toSelect.value;
 		updateResult();
+	});
+
+	fromCustom.addEventListener("change", function() {
+		if (!fromCustom.checked && !sample.coins.some((coin) => coin.symbol == fromInput.value)) {
+			fromInput.value = first;
+			fromInput.dispatchEvent(new CustomEvent("change"));
+		}
+	});
+
+	toCustom.addEventListener("change", function() {
+		if (!toCustom.checked && !sample.coins.some((coin) => coin.symbol == toInput.value)) {
+			toInput.value = first;
+			toInput.dispatchEvent(new CustomEvent("change"));
+		}
 	});
 
 	fromSelect.value = first;
