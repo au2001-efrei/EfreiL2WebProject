@@ -140,3 +140,82 @@
 .coin-link + .coin-link + .coin-link + .coin-link + .coin-link + .coin-link {
 	display: none;
 }
+
+@media screen and (max-width: 556px) {
+
+	.coin {
+		width: 90vw;
+		height: 45vw;
+
+		padding: 3.6vw 4.5vw;
+		margin: 3.6vw 0;
+
+		border-radius: 6.3vw;
+	}
+
+	.coin-top {
+		height: 9vw;
+		margin-bottom: 3.6vw;
+	}
+
+	.coin-icon-container {
+		padding: 1.8vw;
+		margin: -1.8vw;
+		border-radius: 9vw;
+	}
+
+	.coin-icon {
+		width: 9vw;
+		height: 9vw;
+	}
+
+	.coin-axis, .coin-variation {
+		width: 10.8vw;
+	}
+
+	.coin-axis {
+		margin-right: .9vw;
+	}
+
+	.coin-variation {
+		margin-left: .9vw;
+	}
+
+	.coin-bottom {
+		height: 8.1vw;
+		margin-top: 3.6vw;
+	}
+
+	.coin-rank {
+		font-size: 4.32vw;
+		padding-right: 3.6vw;
+	}
+
+	.coin-labels, .coin-values {
+		font-size: 2.16vw;
+		line-height: 2.7vw;
+	}
+
+	.coin-labels {
+		padding-right: .9vw;
+	}
+
+	.coin-values {
+		padding-left: .9vw;
+	}
+
+	.coin-socials {
+		font-size: 4.32vw;
+		line-height: 4.05vw;
+	}
+
+	.coin-link {
+		margin: 0 .9vw;
+	}
+
+	.coin-canvas {
+		width: 57.6vw;
+		height: 13.5vw;
+	}
+
+}

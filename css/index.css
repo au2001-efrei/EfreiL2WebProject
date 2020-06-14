@@ -72,11 +72,6 @@ section .right p {
 	margin-top: 2em;
 }
 
-#random-coins {
-	white-space: nowrap;
-	overflow-x: auto;
-}
-
 #random-coins .coin {
 	display: inline-block;
 }
@@ -84,6 +79,7 @@ section .right p {
 .columns {
 	display: flex;
 	flex-direction: row;
+	flex-wrap: wrap;
 }
 
 .columns > * {
@@ -98,6 +94,15 @@ section .right p {
 	100% {
 		transform: translate(-10px, -20px) rotate(-10deg)
 	}
+}
+
+@media screen and (min-width: 800px) {
+
+	#random-coins {
+		white-space: nowrap;
+		overflow-x: auto;
+	}
+
 }
 
 @media screen and (max-width: 799px) and (min-height: 800px) {
