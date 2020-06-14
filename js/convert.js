@@ -86,6 +86,7 @@
 		toAmount.setAttribute("data-value", result);
 	}
 
+	form.addEventListener("submit", updateResult);
 	fromAmount.addEventListener("change", updateResult);
 
 	fromInput.addEventListener("change", function() {

@@ -18,6 +18,24 @@ async function getCoinsList(limit = 100, offset = 0, sort = "coinranking", order
 	return json.data;
 }
 
+async function searchCoins(prefix, sort = "coinranking", order = "desc") {
+	if (prefix.length === 0) {
+		return {
+			stats: {},
+			base: {},
+			coins: []
+		};
+	}
+
+	const response = await fetch(`https://api.coinranking.com/v1/public/coins?prefix=${prefix}&sort=${sort}&order=${order}`);
+	const json = await response.json();
+
+	if (json.status !== "success")
+		throw JSON.stringify(json);
+
+	return json.data;
+}
+
 async function getCoin(id) {
 	const response = await fetch(`https://api.coinranking.com/v1/public/coin/${id}`);
 	const json = await response.json();
@@ -33,6 +51,19 @@ async function searchCoinSymbol(symbol) {
 		symbol = symbol.join(",");
 
 	const response = await fetch(`https://api.coinranking.com/v1/public/coins?symbols=${symbol}`);
+	const json = await response.json();
+
+	if (json.status !== "success")
+		throw JSON.stringify(json);
+
+	return json.data;
+}
+
+async function searchCoinID(id) {
+	if (Array.isArray(id))
+		id = id.join(",");
+
+	const response = await fetch(`https://api.coinranking.com/v1/public/coins?ids=${id}`);
 	const json = await response.json();
 
 	if (json.status !== "success")
@@ -91,6 +122,52 @@ async function getRandomCoins(limit = 3) {
 	}
 
 	return { stats, base, coins };
+}
+
+// Favorites //
+
+async function getFavorites() {
+	var array = window.localStorage.getItem("Mackee_favorite_coins");
+	if (array === null) {
+		return {
+			stats: {},
+			base: {},
+			coins: []
+		};
+	}
+	array = JSON.parse(array);
+
+	return await searchCoinID(array);
+}
+
+function removeFavorite(coin) {
+	var array = window.localStorage.getItem("Mackee_favorite_coins");
+	if (array === null) return;
+	array = JSON.parse(array);
+
+	const index = array.indexOf(coin.id);
+	if (index === - 1) return;
+	array.splice(index, 1);
+
+	if (array.length > 0) {
+		window.localStorage.setItem("Mackee_favorite_coins", JSON.stringify(array));
+	} else {
+		window.localStorage.removeItem("Mackee_favorite_coins");
+	}
+}
+
+function addFavorite(coin) {
+	var array = window.localStorage.getItem("Mackee_favorite_coins");
+	if (array === null) {
+		array = [];
+	} else {
+		array = JSON.parse(array);
+		if (array.includes(coin.id)) return;
+	}
+
+	array.push(coin.id);
+
+	window.localStorage.setItem("Mackee_favorite_coins", JSON.stringify(array));
 }
 
 // Utils //
@@ -451,6 +528,9 @@ function createCoinCard(coin) {
 }
 
 function fillCoins(element, coins) {
-	for (var i in coins)
-		element.appendChild(createCoinCard(coins[i]));
+	for (var i in coins) {
+		const coin = coins[i];
+		if (coin === null) continue;
+		element.appendChild(createCoinCard(coin));
+	}
 }
