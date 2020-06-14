@@ -16,3 +16,72 @@ input[name=to-custom]:checked ~ .to-non-custom,
 input[name=to-custom]:not(:checked) ~ .to-custom {
 	display: none;
 }
+
+#convert-form {
+	display: flex;
+	margin: 50px 0;
+}
+
+#from-coin, #to-coin {
+	position: relative;
+	display: flex;
+
+	flex: 2;
+	height: 50px;
+
+	box-sizing: border-box;
+	padding: 10px 20px;
+	margin: 0 50px;
+
+	border-radius: 25px;
+
+	box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.16);
+}
+
+#invert-from-to {
+	flex: 1;
+	font-size: 32px;
+	border: none;
+	background: none;
+}
+
+input[name=from-coin-amount], .to-coin-amount, select[name=from-coin-select], input[name=from-coin], select[name=to-coin-select], input[name=to-coin] {
+	height: 30px;
+	line-height: 30px;
+	padding: 0;
+	margin: 0;
+	border: none;
+	outline: none;
+	font-size: 1em;
+	vertical-align: middle;
+}
+
+input[name=from-coin-amount], .to-coin-amount {
+	flex: 2;
+}
+
+select[name=from-coin-select], input[name=from-coin], select[name=to-coin-select], input[name=to-coin] {
+	flex: 1;
+	margin-left: 1em;
+	text-align: right;
+}
+
+label.from-non-custom, label.to-non-custom, label.from-custom, label.to-custom {
+	position: absolute;
+	height: 20px;
+	line-height: 20px;
+	text-align: center;
+	cursor: pointer;
+}
+
+label.from-non-custom, label.to-non-custom {
+	bottom: -30px;
+	left: 0;
+	width: 100%;
+}
+
+label.from-custom, label.to-custom {
+	right: -30px;
+	top: 15px;
+	width: 20px;
+}

@@ -2,7 +2,35 @@
 	const sample = await getCoinsList();
 	const form = document.querySelector("#convert-form");
 
+	var cache = {};
+	for (var i = 0; i < sample.coins.length; ++i) {
+		const coin = sample.coins[i];
+		cache[coin.symbol.toUpperCase()] = coin;
+	}
+
 	const first = sample.coins[0].symbol;
+	sample.coins.push({
+		symbol: "USD",
+		name: "United States dollar"
+	}, {
+		symbol: "EUR",
+		name: "Euro"
+	}, {
+		symbol: "JPY",
+		name: "Japanese yen"
+	}, {
+		symbol: "GBP",
+		name: "Pound sterling"
+	}, {
+		symbol: "AUD",
+		name: "Australian dollar"
+	}, {
+		symbol: "CAD",
+		name: "Canadian dollar"
+	}, {
+		symbol: "CHF",
+		name: "Swiss franc"
+	});
 	sample.coins.sort((a, b) => a.symbol.localeCompare(b.symbol));
 
 	const fromSelect = form['from-coin-select'], toSelect = form['to-coin-select'];
@@ -19,12 +47,6 @@
 
 		fromSelect.appendChild(option);
 		toSelect.appendChild(option.cloneNode(true));
-	}
-
-	var cache = {};
-	for (var i = 0; i < sample.coins.length; ++i) {
-		const coin = sample.coins[i];
-		cache[coin.symbol.toUpperCase()] = coin;
 	}
 
 	async function findCoin(symbol) {
