@@ -82,8 +82,9 @@ section .right p {
 	flex-wrap: wrap;
 }
 
-.columns > * {
+.columns > div {
 	flex: 1;
+	margin-bottom: 50px;
 }
 
 @-webkit-keyframes floating-phone {

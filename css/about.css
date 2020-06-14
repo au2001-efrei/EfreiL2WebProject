@@ -15,6 +15,7 @@
 	list-style-type: none;
 	padding-left: 0;
 	display: flex;
+	margin: 20px 0 50px 0;
 }
 
 .people li {
@@ -44,6 +45,7 @@
 	font-size: 0;
 	font-style: italic;
 	line-height: 40px;
+	margin: 20px 0;
 }
 
 .people li .quote i, .people li .quote span {
@@ -69,6 +71,15 @@
 .people li .quote i:last-child {
 	top: 10px;
 	left: 25px;
+}
+
+.people li .quote i:last-child {
+	top: 10px;
+	left: 25px;
+}
+
+.people li .biography {
+	margin: 0;
 }
 
 @media screen and (max-width: 899px) {

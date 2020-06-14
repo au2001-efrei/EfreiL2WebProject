@@ -44,7 +44,9 @@
 				refreshFavorites();
 			});
 		} else {
-			favoriteCoins.innerText = "You don't have any favorite cryptocurrency.";
+			const paragraph = document.createElement("p");
+			paragraph.innerText = "You don't have any favorite cryptocurrency.";
+			favoriteCoins.appendChild(paragraph);
 		}
 	}
 
@@ -64,7 +66,9 @@
 				refreshFavorites();
 			});
 		} else {
-			searchResults.innerText = "No cryptocurrency found matching your query.";
+			const paragraph = document.createElement("p");
+			paragraph.innerText = "No cryptocurrency found matching your query.";
+			searchResults.appendChild(paragraph);
 		}
 	}
 
