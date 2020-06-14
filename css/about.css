@@ -43,6 +43,7 @@
 .people li .quote {
 	font-size: 0;
 	font-style: italic;
+	line-height: 40px;
 }
 
 .people li .quote i, .people li .quote span {
@@ -55,19 +56,19 @@
 
 .people li .quote i {
 	position: relative;
-	font-size: 64px;
+	font-size: 32px;
 	opacity: .2;
-	transform: rotate(3deg);
+	transform: rotate(3deg) scale(1.8);
 }
 
 .people li .quote i:first-child {
 	bottom: 10px;
-	right: 15px;
+	right: 25px;
 }
 
 .people li .quote i:last-child {
 	top: 10px;
-	left: 18px;
+	left: 25px;
 }
 
 @media screen and (max-width: 899px) {
