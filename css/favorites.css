@@ -10,3 +10,11 @@
 	margin: 0;
 	margin-top: 2em;
 }
+
+#favorite-coins {
+	display: flex;
+
+	flex-wrap: wrap;
+
+	justify-content: space-around;
+}
